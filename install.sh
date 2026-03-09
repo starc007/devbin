@@ -46,16 +46,17 @@ echo "> Installing from GitHub (${DEVBIN_REPO}@${DEVBIN_REF})..."
 # Subshell with stdin from /dev/null so git/npm don't consume the rest of the script (curl | bash)
 if ( npm install -g "git+${GIT_URL}" ) < /dev/null; then
   echo ""
-  NPM_BIN="$(npm bin -g 2>/dev/null)"
+  NPM_PREFIX="$(npm config get prefix 2>/dev/null | tr -d '\n')"
+  NPM_BIN="${NPM_PREFIX}/bin"
   if command -v devbin >/dev/null 2>&1; then
     echo "Done. Run: devbin"
-  elif [ -n "$NPM_BIN" ] && [ -x "${NPM_BIN}/devbin" ]; then
+  elif [ -n "$NPM_BIN" ] && [ -f "${NPM_BIN}/devbin" ]; then
     # Put devbin in ~/.local/bin (wrapper script; symlink often breaks with npm global installs)
     BIN_DIR="$HOME/.local/bin"
     mkdir -p "$BIN_DIR"
     cat > "$BIN_DIR/devbin" << 'WRAPPER'
 #!/bin/sh
-exec "$(npm bin -g 2>/dev/null | tr -d '\n')/devbin" "$@"
+exec "$(npm config get prefix 2>/dev/null | tr -d '\n')/bin/devbin" "$@"
 WRAPPER
     chmod +x "$BIN_DIR/devbin"
 

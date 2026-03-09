@@ -5,10 +5,12 @@
 set -e
 
 BIN_DIR="$HOME/.local/bin"
-NPM_BIN="$(npm bin -g 2>/dev/null | tr -d '\n')"
+# npm config get prefix works in all npm versions; npm bin -g is not always available
+NPM_PREFIX="$(npm config get prefix 2>/dev/null | tr -d '\n')"
+NPM_BIN="${NPM_PREFIX}/bin"
 
-if [ -z "$NPM_BIN" ]; then
-  echo "Error: npm bin -g failed. Is Node/npm installed?" >&2
+if [ -z "$NPM_PREFIX" ] || [ ! -d "$NPM_BIN" ]; then
+  echo "Error: could not get npm global path. Is Node/npm installed?" >&2
   exit 1
 fi
 
@@ -21,7 +23,7 @@ mkdir -p "$BIN_DIR"
 # Wrapper script: symlinks to npm's devbin often break (relative paths). Run the real one by path.
 cat > "$BIN_DIR/devbin" << 'WRAPPER'
 #!/bin/sh
-exec "$(npm bin -g 2>/dev/null | tr -d '\n')/devbin" "$@"
+exec "$(npm config get prefix 2>/dev/null | tr -d '\n')/bin/devbin" "$@"
 WRAPPER
 chmod +x "$BIN_DIR/devbin"
 
