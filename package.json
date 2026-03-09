@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "prepare": "npm install --include=dev && npm run build",
+    "prepare": "npx tsc",
     "start": "node dist/cli.js",
     "dev": "tsc --watch",
     "cli": "tsx src/cli.ts",
