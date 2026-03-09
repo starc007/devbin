@@ -50,11 +50,14 @@ if ( npm install -g "git+${GIT_URL}" ) < /dev/null; then
   if command -v devbin >/dev/null 2>&1; then
     echo "Done. Run: devbin"
   elif [ -n "$NPM_BIN" ] && [ -x "${NPM_BIN}/devbin" ]; then
-    # Put devbin in ~/.local/bin and add to PATH so it works in every new terminal
+    # Put devbin in ~/.local/bin (wrapper script; symlink often breaks with npm global installs)
     BIN_DIR="$HOME/.local/bin"
     mkdir -p "$BIN_DIR"
-    ln -sf "${NPM_BIN}/devbin" "$BIN_DIR/devbin" 2>/dev/null || cp "${NPM_BIN}/devbin" "$BIN_DIR/devbin" 2>/dev/null
-    chmod +x "$BIN_DIR/devbin" 2>/dev/null || true
+    cat > "$BIN_DIR/devbin" << 'WRAPPER'
+#!/bin/sh
+exec "$(npm bin -g 2>/dev/null | tr -d '\n')/devbin" "$@"
+WRAPPER
+    chmod +x "$BIN_DIR/devbin"
 
     if [ -n "${ZSH_VERSION:-}" ] || [ -f "$HOME/.zshrc" ]; then
       RCFILE="$HOME/.zshrc"

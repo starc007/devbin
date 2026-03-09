@@ -25,6 +25,14 @@ curl -fsSL https://raw.githubusercontent.com/starc007/devbin/main/install.sh -o 
 
 This downloads the script then runs it (so you always see the final “Done” message). The script installs from [github.com/starc007/devbin](https://github.com/starc007/devbin)—the repo is cloned and built on your machine; nothing is published to npm.
 
+**If you get "command not found: devbin"** after installing, run:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/starc007/devbin/main/fix-path.sh | bash
+```
+
+That puts `devbin` in `~/.local/bin`, adds it to your PATH, and starts it. In new terminals, if `devbin` still isn’t found (e.g. in zsh), run once: `rehash` then `devbin`.
+
 **Install from Git directly** (same result, no curl script):
 
 ```bash
