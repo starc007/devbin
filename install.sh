@@ -41,7 +41,35 @@ fi
 echo "> Installing from GitHub (${DEVBIN_REPO}@${DEVBIN_REF})..."
 if npm install -g "git+${GIT_URL}"; then
   echo ""
-  echo "Done. Run: devbin"
+  if command -v devbin >/dev/null 2>&1; then
+    echo "Done. Run: devbin"
+  else
+    NPM_BIN="$(npm bin -g 2>/dev/null)"
+    if [ -n "$NPM_BIN" ] && [ -x "${NPM_BIN}/devbin" ]; then
+      # Add npm global bin to PATH in shell config so it works like other CLI tools
+      if [ -n "${ZSH_VERSION:-}" ] || [ -f "$HOME/.zshrc" ]; then
+        RCFILE="$HOME/.zshrc"
+      else
+        RCFILE="$HOME/.bashrc"
+      fi
+      PATH_LINE="export PATH=\"\$PATH:${NPM_BIN}\""
+      if [ -f "$RCFILE" ] && grep -q "[[:space:]]*export PATH=.*${NPM_BIN}" "$RCFILE" 2>/dev/null; then
+        echo "Done. Run: devbin"
+      elif [ -z "${DEVBIN_NO_ADD_PATH:-}" ]; then
+        [ -f "$RCFILE" ] || touch "$RCFILE"
+        echo "" >> "$RCFILE"
+        echo "# npm global bin (added by devbin installer)" >> "$RCFILE"
+        echo "$PATH_LINE" >> "$RCFILE"
+        echo "Done. Run: devbin  (open a new terminal, or: source $RCFILE)"
+      else
+        echo "Done. Add to PATH: $PATH_LINE"
+      fi
+      # Make devbin available in this session too
+      export PATH="${PATH}:${NPM_BIN}"
+    else
+      echo "Done. Run: devbin"
+    fi
+  fi
 else
   echo ""
   echo "Install failed. Make sure the repo exists and DEVBIN_REPO is set (e.g. your-username/devbin)." >&2
