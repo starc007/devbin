@@ -1,0 +1,60 @@
+{
+  "name": "devbin",
+  "version": "1.0.0",
+  "description": "Interactive CLI tool manager for macOS — discover, manage, and uninstall CLI tools",
+  "type": "module",
+  "main": "dist/cli.js",
+  "bin": {
+    "devbin": "./dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/cli.js",
+    "dev": "tsc --watch",
+    "cli": "tsx src/cli.ts",
+    "test": "vitest run",
+    "lint": "eslint src --ext .ts,.tsx",
+    "lint:fix": "eslint src --ext .ts,.tsx --fix",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "cli",
+    "tool-manager",
+    "homebrew",
+    "npm",
+    "cargo",
+    "pip",
+    "macos"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "execa": "^9.5.2",
+    "figlet": "^1.8.0",
+    "ink": "^5.0.1",
+    "ink-select-input": "^6.0.0",
+    "ink-spinner": "^5.0.0",
+    "react": "^18.3.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.16.0",
+    "@types/figlet": "^1.7.0",
+    "@types/node": "^22.10.1",
+    "typescript-eslint": "^8.16.0",
+    "@types/react": "^18.3.12",
+    "eslint": "^9.16.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.6"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0"
+  }
+}
