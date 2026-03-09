@@ -1,7 +1,8 @@
 /**
  * Supported package managers. Used for detection and uninstall commands.
+ * "path" = executables found in PATH (not managed by brew/npm/cargo/pip).
  */
-export type Manager = "brew" | "npm" | "cargo" | "pip";
+export type Manager = "brew" | "npm" | "cargo" | "pip" | "path";
 
 /**
  * Canonical representation of an installed CLI tool.
