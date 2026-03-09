@@ -16,8 +16,8 @@
     "dev": "tsc --watch",
     "cli": "tsx src/cli.ts",
     "test": "vitest run",
-    "lint": "eslint src --ext .ts,.tsx",
-    "lint:fix": "eslint src --ext .ts,.tsx --fix",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
     "typecheck": "tsc --noEmit"
   },
   "keywords": [

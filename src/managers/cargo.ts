@@ -8,7 +8,7 @@ export async function listCargo(): Promise<ManagerResult> {
     return {
       manager: "cargo",
       tools: [],
-      error: result.stderr || `cargo exited with code ${result.exitCode}`,
+      error: result.stderr || `cargo exited with code ${String(result.exitCode)}`,
     };
   }
   const tools = parseCargoList(result.stdout);

@@ -8,7 +8,7 @@ export async function listPip(): Promise<ManagerResult> {
     return {
       manager: "pip",
       tools: [],
-      error: result.stderr || `pip3 exited with code ${result.exitCode}`,
+      error: result.stderr || `pip3 exited with code ${String(result.exitCode)}`,
     };
   }
   const tools = parsePipList(result.stdout);

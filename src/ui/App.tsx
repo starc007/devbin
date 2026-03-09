@@ -151,7 +151,9 @@ export function App() {
     return (
       <UninstallConfirm
         tool={selectedTool}
-        onConfirm={(ok) => void handleUninstallConfirm(ok)}
+        onConfirm={(ok) => {
+          void handleUninstallConfirm(ok);
+        }}
       />
     );
   }
@@ -161,7 +163,9 @@ export function App() {
       <Analyze
         groups={groups}
         tools={tools}
-        onBack={() => setScreen("dashboard")}
+        onBack={() => {
+          setScreen("dashboard");
+        }}
       />
     );
   }

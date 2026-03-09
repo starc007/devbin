@@ -23,7 +23,9 @@ interface AnalyzeProps {
 }
 
 export function Analyze({ groups, tools, onBack }: AnalyzeProps) {
-  useInput(() => onBack());
+  useInput(() => {
+    onBack();
+  });
   const duplicates = findDuplicates(tools);
 
   return (

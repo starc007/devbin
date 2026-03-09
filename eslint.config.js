@@ -7,11 +7,21 @@ export default tseslint.config(
   {
     languageOptions: {
       parserOptions: { project: "./tsconfig.json" },
-      globals: { process: "readonly", console: "readonly", __dirname: "readonly" },
+      globals: {
+        process: "readonly",
+        console: "readonly",
+        __dirname: "readonly",
+      },
     },
     rules: {
-      "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
-      "@typescript-eslint/consistent-type-imports": ["error", { prefer: "type-only" }],
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        { argsIgnorePattern: "^_" },
+      ],
+"@typescript-eslint/consistent-type-imports": [
+      "error",
+      { prefer: "type-imports", fixStyle: "inline-type-imports" },
+    ],
     },
   }
 );

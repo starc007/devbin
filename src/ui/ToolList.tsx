@@ -44,7 +44,9 @@ export function ToolList({ groups, mode, onSelect }: ToolListProps) {
       <Box marginTop={1}>
         <SelectInput<ToolItemValue>
           items={items}
-          onSelect={(item: SelectItem<ToolItemValue>) => onSelect(item.value)}
+          onSelect={(item: SelectItem<ToolItemValue>) => {
+            onSelect(item.value);
+          }}
         />
       </Box>
       {mode === "uninstall" && (

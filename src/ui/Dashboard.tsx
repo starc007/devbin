@@ -34,7 +34,9 @@ export function Dashboard({ onSelect }: DashboardProps) {
       <Box marginTop={1}>
         <SelectInput<DashboardAction>
           items={ITEMS}
-          onSelect={(item: SelectItem<DashboardAction>) => onSelect(item.value)}
+          onSelect={(item: SelectItem<DashboardAction>) => {
+            onSelect(item.value);
+          }}
         />
       </Box>
       <Box marginTop={2}>

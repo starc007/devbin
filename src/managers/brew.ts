@@ -8,7 +8,7 @@ export async function listBrew(): Promise<ManagerResult> {
     return {
       manager: "brew",
       tools: [],
-      error: result.stderr || `brew exited with code ${result.exitCode}`,
+      error: result.stderr || `brew exited with code ${String(result.exitCode)}`,
     };
   }
   const tools = parseBrewList(result.stdout);

@@ -26,7 +26,9 @@ export function UninstallConfirm({ tool, onConfirm }: UninstallConfirmProps) {
       <Box marginTop={1}>
         <SelectInput
           items={ITEMS}
-          onSelect={(item: { value: Choice }) => onConfirm(item.value === "yes")}
+          onSelect={(item: { value: Choice }) => {
+          onConfirm(item.value === "yes");
+        }}
         />
       </Box>
     </Box>

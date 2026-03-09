@@ -21,8 +21,8 @@ export async function run(
       reject: false,
     });
     return {
-      stdout: String(result.stdout ?? ""),
-      stderr: String(result.stderr ?? ""),
+      stdout: typeof result.stdout === "string" ? result.stdout : "",
+      stderr: typeof result.stderr === "string" ? result.stderr : "",
       exitCode: result.exitCode ?? (result.failed ? 1 : 0),
     };
   } catch (err) {
