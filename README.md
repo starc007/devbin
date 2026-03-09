@@ -31,6 +31,22 @@ The script installs from [github.com/starc007/devbin](https://github.com/starc00
 npm install -g git+https://github.com/starc007/devbin.git
 ```
 
+## Uninstall
+
+**One-liner:**
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/starc007/devbin/main/uninstall.sh | bash
+```
+
+**Or manually:**
+
+```bash
+npm uninstall -g devbin
+```
+
+If the installer added npm’s global bin to your PATH in `~/.zshrc` or `~/.bashrc`, you can remove that block (the comment says “added by devbin installer”).
+
 ## Usage
 
 Run from an interactive terminal:
