@@ -50,24 +50,35 @@ if ( npm install -g "git+${GIT_URL}" ) < /dev/null; then
   if command -v devbin >/dev/null 2>&1; then
     echo "Done. Run: devbin"
   elif [ -n "$NPM_BIN" ] && [ -x "${NPM_BIN}/devbin" ]; then
-    # Add npm global bin to PATH in shell config so it works like other CLI tools
+    # Put devbin in ~/.local/bin and add to PATH so it works in every new terminal
+    BIN_DIR="$HOME/.local/bin"
+    mkdir -p "$BIN_DIR"
+    ln -sf "${NPM_BIN}/devbin" "$BIN_DIR/devbin" 2>/dev/null || cp "${NPM_BIN}/devbin" "$BIN_DIR/devbin" 2>/dev/null
+    chmod +x "$BIN_DIR/devbin" 2>/dev/null || true
+
     if [ -n "${ZSH_VERSION:-}" ] || [ -f "$HOME/.zshrc" ]; then
       RCFILE="$HOME/.zshrc"
     else
       RCFILE="$HOME/.bashrc"
     fi
-    PATH_LINE="export PATH=\"\$PATH:${NPM_BIN}\""
-    if [ -f "$RCFILE" ] && grep -q "[[:space:]]*export PATH=.*${NPM_BIN}" "$RCFILE" 2>/dev/null; then
-      echo "Done. Run in this terminal: source $RCFILE && devbin"
-    elif [ -z "${DEVBIN_NO_ADD_PATH:-}" ]; then
+    PATH_ADD="export PATH=\"\$HOME/.local/bin:\$PATH\""
+    if [ -z "${DEVBIN_NO_ADD_PATH:-}" ]; then
       [ -f "$RCFILE" ] || touch "$RCFILE"
-      echo "" >> "$RCFILE"
-      echo "# npm global bin (added by devbin installer)" >> "$RCFILE"
-      echo "$PATH_LINE" >> "$RCFILE"
-      echo "Done. Run in this terminal: source $RCFILE && devbin"
-      echo "  (or open a new terminal and run: devbin)"
-    else
-      echo "Done. Run: $NPM_BIN/devbin"
+      if ! grep -q '.local/bin' "$RCFILE" 2>/dev/null; then
+        echo "" >> "$RCFILE"
+        echo "# devbin (and other local bins)" >> "$RCFILE"
+        echo "$PATH_ADD" >> "$RCFILE"
+      fi
+    fi
+    echo "Done. devbin installed to $BIN_DIR"
+    echo ""
+    echo "Run in this terminal:  source $RCFILE && devbin"
+    echo "Or open a new terminal and run:  devbin"
+    echo ""
+    if [ -t 0 ]; then
+      echo "Starting devbin now..."
+      export PATH="$BIN_DIR:$PATH"
+      exec "$BIN_DIR/devbin"
     fi
   else
     echo "Done. Run: devbin"
