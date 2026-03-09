@@ -21,8 +21,8 @@ export async function run(
       reject: false,
     });
     return {
-      stdout: typeof result.stdout === "string" ? result.stdout : "",
-      stderr: typeof result.stderr === "string" ? result.stderr : "",
+      stdout: (result.stdout as string | undefined) ?? "",
+      stderr: (result.stderr as string | undefined) ?? "",
       exitCode: result.exitCode ?? (result.failed ? 1 : 0),
     };
   } catch (err) {
