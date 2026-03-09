@@ -20,10 +20,10 @@
 **One-liner** (installs from GitHub; no npm publish needed; requires Node.js ≥ 18):
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/starc007/devbin/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/starc007/devbin/main/install.sh -o /tmp/install-devbin.sh && bash /tmp/install-devbin.sh
 ```
 
-The script installs from [github.com/starc007/devbin](https://github.com/starc007/devbin)—the repo is cloned and built on your machine; nothing is published to npm.
+This downloads the script then runs it (so you always see the final “Done” message). The script installs from [github.com/starc007/devbin](https://github.com/starc007/devbin)—the repo is cloned and built on your machine; nothing is published to npm.
 
 **Install from Git directly** (same result, no curl script):
 

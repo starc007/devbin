@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 # Install devbin from GitHub (no npm publish required).
-# Usage: curl -fsSL https://raw.githubusercontent.com/starc007/devbin/main/install.sh | bash
 #
-# Optional: DEVBIN_REPO=owner/devbin DEVBIN_REF=main (ref = branch, tag, or commit)
+# Recommended (avoids pipe consuming script):
+#   curl -fsSL https://raw.githubusercontent.com/starc007/devbin/main/install.sh -o /tmp/install-devbin.sh && bash /tmp/install-devbin.sh
+#
+# Or: curl -fsSL .../install.sh | bash  (if "Done" doesn't appear, run: source ~/.zshrc && devbin)
+#
+# Optional: DEVBIN_REPO=owner/devbin DEVBIN_REF=main
 
 set -e
 
@@ -39,8 +43,8 @@ if ! command -v npm >/dev/null 2>&1; then
 fi
 
 echo "> Installing from GitHub (${DEVBIN_REPO}@${DEVBIN_REF})..."
-# Use </dev/null so npm doesn't consume the rest of the script when run as: curl ... | bash
-if npm install -g "git+${GIT_URL}" < /dev/null; then
+# Subshell with stdin from /dev/null so git/npm don't consume the rest of the script (curl | bash)
+if ( npm install -g "git+${GIT_URL}" ) < /dev/null; then
   echo ""
   NPM_BIN="$(npm bin -g 2>/dev/null)"
   if command -v devbin >/dev/null 2>&1; then
