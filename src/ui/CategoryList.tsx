@@ -10,7 +10,9 @@ const MANAGER_LABELS: Record<string, string> = {
   path: "PATH / Other",
 };
 
-type CategoryValue = { type: "category"; group: ManagerResult } | { type: "back" };
+type CategoryValue =
+  | { type: "category"; group: ManagerResult }
+  | { type: "back" };
 
 interface SelectItem<V> {
   label: string;
@@ -18,9 +20,13 @@ interface SelectItem<V> {
   key?: string;
 }
 
-function buildItems(groups: readonly ManagerResult[]): SelectItem<CategoryValue>[] {
+function buildItems(
+  groups: readonly ManagerResult[]
+): SelectItem<CategoryValue>[] {
   const items: SelectItem<CategoryValue>[] = groups.map((group) => ({
-    label: `${MANAGER_LABELS[group.manager] ?? group.manager} (${String(group.tools.length)})`,
+    label: `${MANAGER_LABELS[group.manager] ?? group.manager} (${String(
+      group.tools.length
+    )})`,
     value: { type: "category", group },
     key: group.manager,
   }));

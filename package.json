@@ -12,6 +12,7 @@
   ],
   "scripts": {
     "build": "tsc",
+    "prepare": "npm run build",
     "start": "node dist/cli.js",
     "dev": "tsc --watch",
     "cli": "tsx src/cli.ts",

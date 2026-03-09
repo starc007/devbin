@@ -17,14 +17,18 @@
 
 ## Install
 
+**One-liner** (installs from GitHub; no npm publish needed; requires Node.js ≥ 18):
+
 ```bash
-npm install -g devbin
+curl -fsSL https://raw.githubusercontent.com/starc007/devbin/main/install.sh | bash
 ```
 
-Or run without installing:
+The script installs from [github.com/starc007/devbin](https://github.com/starc007/devbin)—the repo is cloned and built on your machine; nothing is published to npm.
+
+**Install from Git directly** (same result, no curl script):
 
 ```bash
-npx devbin
+npm install -g git+https://github.com/starc007/devbin.git
 ```
 
 ## Usage
