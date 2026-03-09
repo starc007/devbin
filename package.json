@@ -12,7 +12,6 @@
   ],
   "scripts": {
     "build": "tsc",
-    "prepare": "npx -p typescript tsc",
     "start": "node dist/cli.js",
     "dev": "tsc --watch",
     "cli": "tsx src/cli.ts",

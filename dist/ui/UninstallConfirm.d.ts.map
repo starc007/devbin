@@ -1,0 +1,1 @@
+{"version":3,"file":"UninstallConfirm.d.ts","sourceRoot":"","sources":["../../src/ui/UninstallConfirm.tsx"],"names":[],"mappings":"AAEA,OAAO,KAAK,EAAE,IAAI,EAAE,MAAM,kBAAkB,CAAC;AAS7C,UAAU,qBAAqB;IAC7B,IAAI,EAAE,IAAI,CAAC;IACX,SAAS,EAAE,CAAC,SAAS,EAAE,OAAO,KAAK,IAAI,CAAC;CACzC;AAED,wBAAgB,gBAAgB,CAAC,EAAE,IAAI,EAAE,SAAS,EAAE,EAAE,qBAAqB,2CAmB1E"}

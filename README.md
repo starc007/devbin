@@ -66,6 +66,8 @@ npm run typecheck
 npm run lint
 ```
 
+The `dist/` folder is committed so that `npm install -g git+https://...` works without running a build. After changing source files, run `npm run build` and commit `dist/` so installs get the latest code.
+
 ## License
 
 MIT
