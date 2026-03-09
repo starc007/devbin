@@ -39,7 +39,8 @@ if ! command -v npm >/dev/null 2>&1; then
 fi
 
 echo "> Installing from GitHub (${DEVBIN_REPO}@${DEVBIN_REF})..."
-if npm install -g "git+${GIT_URL}"; then
+# Use </dev/null so npm doesn't consume the rest of the script when run as: curl ... | bash
+if npm install -g "git+${GIT_URL}" < /dev/null; then
   echo ""
   NPM_BIN="$(npm bin -g 2>/dev/null)"
   if command -v devbin >/dev/null 2>&1; then
